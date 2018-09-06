@@ -1,0 +1,25 @@
+{% extends '../base.html' %}
+{% block main %}	
+		<div class="container">
+			<p class="display-4 text-center pt-3">Welcome to Arik's Blog</p>
+			<p class="float-right">
+				<a href="#" class="btn btn-primary" onclick="location.href="{% url 'blog_add' %}";>Add Post</a>
+			</p>
+			<h2 class="pt-2">Latest Posts</h2><hr>
+		</div>
+	<div class="album bg-light">
+		<div class="container-fluid">
+			<div class="row">
+				{% for each in blogs %}
+				<div class="col-md-4 box hex mb-2" onclick="location.href='{% url 'blog_detail' id=each.id %}';">
+					<h6>{{ each.title }}</h6>
+					<p>{{ each.pub_date }}</p>
+					<img src="{{ each.img.url }}" class="img-thumbnail">
+					<p>{{ each.body|truncatechars:100 }}</p>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends '../base.html' %}
+{% block main %}
+		<div class="container">
+			<p class="display-4 text-center pt-3">Welcome to Arik's Blog</p>
+			{% if messages %}
+			    {% for message in messages %}
+			    <div style="background-color: #C9F0DD; padding: 3px; color: darkgreen;" class="lead text-center">
+			   		{{ message }}
+			   	</div>
+			    {% endfor %}
+			{% endif %}
+			<h2 class="pt-2">{{ instance.title }}</h2>
+			<div>
+				<p class="float-right">
+		          <a href="javascript:void(0);" onclick="window.location.assign('{% url 'blog_update' id=instance.id %}')" class="btn btn-secondary">Edit</a>
+		          <a href="javascript:void(0);" onclick="myFunction();" class="btn btn-danger ml-1">Delete</a>
+		        </p>
+				<p class="h5">{{instance.pub_date }}</p>
+			</div>
+			<hr>
+		</div>
+	<div class="album bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<p class="lead">{{ instance.body }}</p>
+				</div>
+				<div class="col-md-6">
+					<img src="{{ instance.img.url }}" class="img-thumbnail">
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+
+function myFunction() {
+    var txt;
+    var r = confirm("Are you sure you wanna delete? {{ instance.title }}");
+    if (r == true) {
+        txt = "You pressed OK!";
+        console.log(txt);
+        window.location.assign('{% url 'blog_delete' id=instance.id %}')
+   		return true;
+    } else {
+        txt = "You pressed Cancel!";
+        console.log(txt);
+        return false;
+    }
+}
+</script>
+
+{% endblock %}

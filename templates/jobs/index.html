@@ -1,0 +1,72 @@
+{% extends '../base.html' %}
+{% block main %}
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Hi, I'm Arik.</h1>
+          <p class="lead text-muted">I am an enthusiastic Web Developer and Software Developer, also a cool Python Programmer living in Jalpaiguri, WB, India. I make Web Applications, usually with Django. I'm also interested in Data Science and Machine Learning.</p>
+          <p>
+            <a href="mailto:ariksarkar16@gmail.com" class="btn btn-primary">Email Me</a>
+          </p>
+          <div class="row">
+          	<div class="col-md-7 mx-auto">
+          		<img src="http://i64.tinypic.com/14c4lfl.jpg" class="rounded-circle img-fluid" >
+          	</div>
+          </div>          
+        </div>
+      </section>
+      {% if messages %}
+		    {% for message in messages %}
+		    <div style="background-color: #C9F0DD; padding: 3px; color: darkgreen;" class="lead text-center">
+		   		{{ message }}
+		   	</div>
+		    {% endfor %}
+		{% endif %}
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+        	<p class="float-right">
+        		<a href="javascript:void(0);" class="btn btn-primary" onclick="window.location.assign('{% url 'job_add' %}')">Add</a>
+        	</p>
+			<p class="display-4" style="font-size: 2.1em;">Perks, Certifications &amp; Projects ({{ jobs.count }})</p>
+			<hr>
+          <div class="row">
+
+          	{% for each in jobs %}
+          	<div class="col-md-4">
+	            <div class="card mb-4 box">
+				  <img class="card-img-top" src="{{ each.img.url }}" alt="Card image cap">
+				  <div class="card-body">
+				    <!-- <h5 class="card-title">Card title</h5> -->
+				   	<p class="float-right">
+			          <a href="javascript:void(0);" onclick="window.location.assign('{% url 'job_update' id=each.id %}')" class="btn btn-secondary btn-sm">Edit</a>
+			          <a href="javascript:void(0);" 
+			          onclick="myFunction('{% url 'job_delete' id=each.id %}');" class="btn btn-danger btn-sm">Delete</a>
+			        </p>
+				    <p class="card-text">{{ each.summary|linebreaks }}</p>
+				  </div>
+				</div>
+			</div>
+			{% endfor %}
+
+          </div>
+        </div>
+      </div>
+<script type="text/javascript">
+
+function myFunction(arik) {
+    var txt;
+    var r = confirm("Are you sure you wanna delete?");
+    if (r == true) {
+        txt = "You pressed OK!";
+        console.log(txt);
+        window.location.assign(arik);
+   		return true;
+    } else {
+        txt = "You pressed Cancel!";
+        console.log(txt);
+        return false;
+    }
+}
+
+</script>
+{% endblock %}

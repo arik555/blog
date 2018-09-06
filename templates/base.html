@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HomePage - Jobs</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<style>
+		.box {
+		  transition: box-shadow .3s; 
+		}
+		.box:hover {
+		  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+		}
+		.hex:hover {
+			cursor: pointer;
+		}
+		.null-content{
+			display: none;
+		}
+		.preloader {
+			margin: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-right: -50%;
+			transform: translate(-50%, -50%);
+		}
+		label {
+			font-weight: bold;	
+		}
+		h1, h2, h3 {
+			font-family: 'Sofia', cursive;
+		}
+	</style>
+</head>
+<body>
+<div class="preloader">
+	<img src="http://i68.tinypic.com/2dqr6t1.gif">
+</div>
+<style type="text/css">
+	#fb:hover {
+		background-color: #365899;
+		color: white;
+	}
+	#lin:hover {
+		background-color: #0073b1;
+		color: white;
+	}
+	#twt:hover {
+		background-color: #1da1f2;
+		color: white;
+	}
+	#ins:hover {
+		background-color: #ff388a;
+		color: white;
+	}
+</style>
+<header class="null-content">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+	  <a class="navbar-brand" href="/" style="font-size: 2em; font-family: 'Sofia', cursive">Arik Sarkar</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav ml-auto">
+	    	<!-- Dropdown -->
+	      <li class="nav-item dropdown">
+		      <a class="nav-item nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+		        Social Links
+		      </a>
+		      <div class="dropdown-menu">
+		        <a class="dropdown-item" href="https://facebook.com/arikassarkar" target="_blank" id="fb">Facebook</a>
+		        <a class="dropdown-item" href="https://www.linkedin.com/in/arik-sarkar-b28a7915a/" target="_blank" id="lin">LinkedIn</a>
+		        <a class="dropdown-item" href="https://twitter.com/sarkararik5" target="_blank" id="twt">Twitter</a>
+		        <a class="dropdown-item" href="https://www.instagram.com/arik0005/" target="_blank" id="ins">Instagram</a>
+		        <!-- <a class="dropdown-item" href="#">Link 3</a> -->
+		      </div>
+		   </li>
+		   	  <!-- Dropdown Ends Here -->
+	      <!-- <a class="nav-item nav-link" href="https://facebook.com/arikassarkar">Facebook</a>
+	      <a class="nav-item nav-link" href="https://www.linkedin.com/in/arik-sarkar-b28a7915a/">LinkedIn</a> -->
+	      <a class="nav-item nav-link" href="https://github.com/arik555" target="_blank">Github</a>
+	      <li class="nav-item dropdown">
+		      <a class="nav-item nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+		        Power Tab
+		      </a>
+		      <div class="dropdown-menu">
+		      	{% if request.user.is_authenticated %}
+		        <a class="dropdown-item" href="javascript:void(0);" onclick="window.location.assign('{% url 'user_details' %}');">My Profile</a>
+		        <a class="dropdown-item" href="javascript:void(0);" onclick="window.location.assign('{% url 'user_update' %}');">Update Profile</a>
+		        <a class="dropdown-item" href="javascript:void(0);" onclick="window.location.assign('{% url 'user_logout' %}');">Logout</a>
+		        {% else %}
+		        <a class="dropdown-item" href="javascript:void(0);" onclick="window.location.assign('{% url 'user_login' %}');">Login</a>
+		        <a class="dropdown-item" href="javascript:void(0);" onclick="window.location.assign('{% url 'user_register' %}');">Register</a>
+		        {% endif %}
+		        <!-- <a class="dropdown-item" href="#">Link 3</a> -->
+		      </div>
+		   </li>
+	      <a class="nav-item nav-link" href="https://drive.google.com/file/d/1iw6cAvsLglMZmlDw4vJy5olGZ2VQm8c0/view?usp=sharing" target="_blank">Resume</a>
+	      <a class="nav-item nav-link" href="/blog">Blog</a>
+	      <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+	    </div>
+	  </div>
+	</nav>
+
+    <main role="main null-content">
+		{% block main %}
+
+		{% endblock %}
+    </main>
+    {% block footer %}
+
+<style type="text/css">
+	#butt {
+		text-decoration: none;
+	}
+	#butt:hover{
+		color: #007bff;
+	}
+</style>
+    <footer class="text-muted bg-dark mt-3 sticky-bottom">
+      <div class="container py-3" style="line-height: 3; color: white;">
+        <p class="float-right">
+          <a href="#" id="butt">Back to top</a>
+        </p>
+        <p class="text-center">&copy; ARIK SARKAR {% now "Y" %}</p>
+      </div>
+    </footer>
+
+
+
+	{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"
+integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$('.preloader').fadeOut(2500, function(){
+			$('.null-content').fadeIn(900);
+		})
+	});
+	$('#id_pub_date').attr('type','date');
+	$('#id_img').attr('accept','image/*');
+</script>
+
+<script type="text/javascript">
+	$('#id_password').attr('type', 'password');
+</script>
+</body>
+</html>

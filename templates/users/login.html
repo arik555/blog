@@ -1,0 +1,80 @@
+{% extends '../base.html' %}
+{% block main %}
+		<div class="container">
+			<h2 class="pt-2">{{ title }}</h2>
+			<hr>
+			<div class="row">
+				<div class="col-md-6">
+					{% load widget_tweaks %}
+					<form method="POST" action="">
+						{% csrf_token %}
+				{% for hidden_field in form.hidden_fields %}
+				  {{ hidden_field }}
+				{% endfor %}
+
+				{% if form.non_field_errors %}
+				  <div class="alert alert-danger" role="alert">
+				    {% for error in form.non_field_errors %}
+				      {{ error }}
+				    {% endfor %}
+				  </div>
+				{% endif %}
+
+				{% for field in form.visible_fields %}
+				  <div class="form-group">
+				    {{ field.label_tag }}
+
+				    {% if form.is_bound %}
+				      {% if field.errors %}
+				        {% render_field field class="form-control is-invalid" %}
+				        {% for error in field.errors %}
+				          <div class="invalid-feedback">
+				            {{ error }}
+				          </div>
+				        {% endfor %}
+				      {% else %}
+				        {% render_field field class="form-control is-valid" %}
+				      {% endif %}
+				    {% else %}
+				      {% render_field field class="form-control" %}
+				    {% endif %}
+
+				    {% if field.help_text %}
+				      <small class="form-text text-muted">{{ field.help_text }}</small>
+				    {% endif %}
+				  </div>
+				{% endfor %}
+			<input type="submit" value="Submit" class="btn btn-success">
+					</form>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+	$('#id_password').attr('type', 'password');
+</script>
+{% endblock %}
+
+	{% block footer %}
+	<style type="text/css">
+		.footer {
+		   position: fixed;
+		   left: 0;
+		   bottom: 0;
+		   width: 100%;
+		}
+		#butt {
+			text-decoration: none;
+		}
+		#butt:hover{
+			color: #007bff;
+		}
+	</style>
+	    <footer class="text-muted bg-dark footer mt-3">
+	      <div class="container py-3" style="line-height: 3; color: white;">
+	        <p class="float-right">
+	          <a href="#" id="butt">Back to top</a>
+	        </p>
+	        <p class="text-center">&copy; ARIK SARKAR {% now "Y" %}</p>
+	      </div>
+	    </footer>
+	{% endblock %}

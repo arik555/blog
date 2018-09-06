@@ -10,6 +10,7 @@
 			    {% endfor %}
 			{% endif %}
 			<h2 class="pt-2">{{ instance.title }}</h2>
+			{% if request.user.is_authenticated %}
 			<div>
 				<p class="float-right">
 		          <a href="javascript:void(0);" onclick="window.location.assign('{% url 'blog_update' id=instance.id %}')" class="btn btn-secondary">Edit</a>
@@ -17,6 +18,7 @@
 		        </p>
 				<p class="h5">{{instance.pub_date }}</p>
 			</div>
+			{% endif %}
 			<hr>
 		</div>
 	<div class="album bg-light">

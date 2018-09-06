@@ -24,9 +24,11 @@
 
       <div class="album py-5 bg-light">
         <div class="container">
+          {% if request.user.is_authenticated %}
         	<p class="float-right">
         		<a href="javascript:void(0);" class="btn btn-primary" onclick="window.location.assign('{% url 'job_add' %}')">Add</a>
         	</p>
+          {% endif %}
 			<p class="display-4" style="font-size: 2.1em;">Perks, Certifications &amp; Projects ({{ jobs.count }})</p>
 			<hr>
           <div class="row">
@@ -37,11 +39,13 @@
 				  <img class="card-img-top" src="{{ each.img.url }}" alt="Card image cap">
 				  <div class="card-body">
 				    <!-- <h5 class="card-title">Card title</h5> -->
+            {% if request.user.is_authenticated %}
 				   	<p class="float-right">
 			          <a href="javascript:void(0);" onclick="window.location.assign('{% url 'job_update' id=each.id %}')" class="btn btn-secondary btn-sm">Edit</a>
 			          <a href="javascript:void(0);" 
 			          onclick="myFunction('{% url 'job_delete' id=each.id %}');" class="btn btn-danger btn-sm">Delete</a>
 			        </p>
+              {% endif %}
 				    <p class="card-text">{{ each.summary|linebreaks }}</p>
 				  </div>
 				</div>
